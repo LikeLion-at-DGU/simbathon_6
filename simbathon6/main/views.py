@@ -1,15 +1,18 @@
+from .models import Blog
 from django.http import request
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 
 # Create your views here.
 def showmain(request):
-    return render(request, 'main/mainpage.html')
+    blogs = Blog.objects.all()
+    return render(request, 'main/mainpage.html', {'blogs':blogs})
 
 def index(request):
     return render(request, 'main/index.html')
 
 def left_sidebar(request):
     return render(request, 'main/left_sidebar.html')
+
 
 def no_sidebar(request):
     return render(request, 'main/no_sidebar.html')
