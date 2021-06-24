@@ -65,12 +65,11 @@
                 </div><br>
                 {% endif %}
 
-                {% if user == review.writer %}               
+                {% if user == review.writer %}
                 <a href="{% url 'review:review_edit' review.id %}">수정하기</a>
-                <a href="{% url 'review:review_delete' review.id %}">삭제하기</a>       
+                <a href="{% url 'review:review_delete' review.id %}">삭제하기</a>
                 {% endif %}
                 <div>
-
             </article>
         </div>
     </div>
