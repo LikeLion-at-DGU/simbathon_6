@@ -120,6 +120,7 @@
             <a href="#" class="icon fa-chart-bar"><span>Account</span></a>
             <ul>
             {%if user.is_authenticated%}
+                <li><a href="{% url 'users:mypage'%}">Mypage</a></li>
                 <li><a href="{% url 'account_logout'%}">Logout</a></li>
             {%else%}
                 <li><a href="{% url 'account_login'%}">Login</a></li>
