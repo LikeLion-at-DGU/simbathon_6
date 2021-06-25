@@ -4,71 +4,74 @@
 
 
 
-	<body class="homepage is-preload">
-		<div id="page-wrapper">
+<body class="homepage is-preload">
+	<div id="page-wrapper">
 
-<!-- Main -->
-<section id="main">
-	<div class="container">
-		<div class="row">
+		<!-- Main -->
+		<section id="main">
+			<div class="container">
+				<div class="row">
 
-			<!-- Content -->
-			<div id="content" class="col-8 col-12-medium">
+					<!-- Content -->
+					<div id="content" class="col-8 col-12-medium">
 
-				<!-- Post -->
-				<article class="box post">		
-					<img src="{%static 'images/dongguk.jpg'%}" height="550" width="1185">
-				</article>
+						<!-- Post -->
+						<article class="box post">
+							<img src="{%static 'images/dongguk.jpg'%}" height="550" width="1185">
+						</article>
+					</div>
+				</div>
 			</div>
-		</div>
-	</div>
-</section>
+		</section>
 
 		<!--Features-->
-			<section id="features">
-				<div class="container">
-					<header>
-						<h2><strong>사이트 구성</strong></h2>
-					</header>
-					<div class="row aln-center">						
-						<div class="col-4 col-6-medium col-12-small">
-				
-							<!-- Feature -->
-								<section>
-									<a href="#" class="image featured"><img src="{% static 'images/information2.png' %}" alt="" /></a>
-									<header>
-										<h3>정보게시판</h3>
-									</header>
-									<p>동아리 소개, 지원방법, sns계정 등 <br>동아리 정보를 담고 있는 게시판입니다.</p>
-								</section>
+		<section id="features">
+			<div class="container">
+				<header>
+					<h2><strong>사이트 구성</strong></h2>
+				</header>
+				<div class="row aln-center">
+					<div class="col-4 col-6-medium col-12-small">
 
-						</div>
-						<div class="col-4 col-6-medium col-12-small">
+						<!-- Feature -->
+						<section>
+							<a href="#" class="image featured"><img src="{% static 'images/information2.png' %}"
+									alt="" /></a>
+							<header>
+								<h3>정보게시판</h3>
+							</header>
+							<p>동아리 소개, 지원방법, sns계정 등 <br>동아리 정보를 담고 있는 게시판입니다.</p>
+						</section>
 
-							<!-- Feature -->
-								<section>
-									<a href="#" class="image featured"><img src="{% static 'images/question.jpg' %}" alt="" /></a>
-									<header>
-										<h3>Q&A게시판</h3>
-									</header>
-									<p>동아리에 관해서 문의할 사항을 올리고 <br>그에 대한 답을 들을 수 있는 게시판입니다.</p>
-								</section>
+					</div>
+					<div class="col-4 col-6-medium col-12-small">
 
-						</div>
-						<div class="col-4 col-6-medium col-12-small">
+						<!-- Feature -->
+						<section>
+							<a href="#" class="image featured">
+							<img src="{% static 'images/question.jpg' %}" alt="" /></a>
+							<header>
+								<h3>Q&A게시판</h3>
+							</header>
+							<p>동아리에 관해서 문의할 사항을 올리고 <br>그에 대한 답을 들을 수 있는 게시판입니다.</p>
+						</section>
 
-							<!-- Feature -->
-								<section>
-									<a href="#" class="image featured"><img src="{%static 'images/review.png' %}" alt="" /></a>
-									<header>
-										<h3>후기게시판</h3>
-									</header>
-									<p> 동아리 선배들의 솔직한 후기를 <br>볼 수 있는 게시판입니다. </p>
-								</section>
-						</div>
-					</div>	
+					</div>
+					<div class="col-4 col-6-medium col-12-small">
+
+						<!-- Feature -->
+						<section>
+							<a href="{% url 'review:showreview' %}" class="image featured">
+							<img src="{%static 'images/review.png' %}" alt="" /></a>
+							<header>
+								<h3>후기게시판</h3>
+							</header>
+							<p> 동아리 선배들의 솔직한 후기를 <br>볼 수 있는 게시판입니다. </p>
+						</section>
+					</div>
 				</div>
-			</section>
-		</div>
-	</body>
+			</div>
+		</section>
+	</div>
+</body>
 {% endblock %}
