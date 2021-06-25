@@ -66,8 +66,11 @@
                 {% endif %}
 
                 {% if user == review.writer %}
-                <a href="{% url 'review:review_edit' review.id %}">수정하기</a>
-                <a href="{% url 'review:review_delete' review.id %}">삭제하기</a>
+                <ul class="actions">
+                    <li><a href="{% url 'review:review_edit' review.id %}" class="button icon solid fa-file">수정</a></li>
+                    <li><a href="{% url 'review:review_delete' review.id %}" class="button icon solid fa-file">삭제</a>
+                    </li>
+                </ul>
                 {% endif %}
                 <div>
             </article>
