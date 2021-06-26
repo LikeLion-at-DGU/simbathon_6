@@ -24,6 +24,7 @@ def question_create(request):
     new_question.save()
     return redirect('question:question_detail', new_question.id) 
 
+
 def question_update(request, id):
     update_question=Question.objects.get(id=id)
     update_question.title = request.POST['title']
@@ -41,6 +42,7 @@ def question_new(request):
 def question_edit(request, id):
     edit_question = Question.objects.get(id=id)
     return render(request,'question/question_edit.html', {'question': edit_question})
+
 
 def question_delete(request, id):
     delete_review = Question.objects.get(id=id)
