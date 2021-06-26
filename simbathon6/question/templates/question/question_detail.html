@@ -1,6 +1,8 @@
 {% extends 'base.html' %}
 {% load static %}
+
 {% block content %}
+
 
 <!-- 본문내용 -->
 <section id="main">
@@ -23,20 +25,41 @@
                      <hr>
                     
                      {% if user == question.writer %}
-                     <ul class="actions">
-                        <li><a href="{% url 'question:question_edit' question.id %}" class="button icon solid fa-file">수정</a></li>
-                        <li><a href="{% url 'question:question_delete' question.id %}" class="button icon solid fa-file">삭제</a>
-                        </li>
-                    </ul>
-                     {% endif %}
-                    <br><hr>
+                     <a href="{% url 'question:question_edit' question.id %}">수정하기</a>
+                     <a href="{% url 'question:question_delete' question.id %}">삭제하기</a>
+                    {% endif %}
+                    <br><br><br><br>
+
+                    <h5>{{question.answer_set.count}}개의 답변이 있습니다.</h5>
+                    <div>
+                      <ul>
+                        {% for answer in question.answer_set.all %} 
+                        <li>{{answer.body}}</li>
+                        {% endfor %}
+                      </ul>
+                    </div>
+
+                    <form action="{% url 'question:answer_create' question.id %}" method="POST">
+                      {% csrf_token %} 
+                      <textarea name="body" id="body" rows="15"></textarea>
+                      <br>
+                      <input type="submit" value="답변등록">
+                    </form>
 
                 </article>
-
+              <!-- 선택된 select 값 고정 -->
+              <script>
+                var obj = document.getElementById("category");
+                for (i = 0; i < obj.options.length; i++) {
+                  if (obj.options[i].value == "{{question.category}}") {
+                    obj.selectedIndex = i;
+                  }
+                }
+              </script>
           </div>
 
-     
+       
     </div>
 </section>
 
-{% endblock %} 
+{% endblock %}
