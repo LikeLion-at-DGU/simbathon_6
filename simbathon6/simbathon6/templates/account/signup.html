@@ -1,8 +1,30 @@
-{% extends 'base.html' %} 
-{% load static %} 
+{% extends 'base.html' %}
+{% load static %}
 {% block content %}
-      <form method="POST" action="{% url 'account_signup' %}">
-        {% csrf_token %} {{ form.as_p }}
-        <input type="submit" value="Signup">
-      </form>
+
+<body class="homepage is-preload">
+  <div id="page-wrapper">
+
+    <!-- Main -->
+    <section id="main">
+      <div class="container">
+        <div class="row">
+
+          <!-- Content -->
+          <div id="content" class="col-8 col-12-medium">
+
+            <!-- Post -->
+            <article class="box post">
+              <form method="POST" action="{% url 'account_signup' %}">
+                {% csrf_token %} {{ form.as_p }}
+                <input type="submit" value="Signup">
+              </form>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+</body>
+
 {% endblock %}

@@ -20,18 +20,19 @@
                 </header>
                 <div>
 
-                    <form action="{%url 'question:question_update' question.id %}" method="POST" enctype="multipart/form-data">
+                    <form action="{%url 'question:question_update' question.id %}" method="POST"
+                        enctype="multipart/form-data">
                         {%csrf_token%}
 
                         <label>동아리명</label>
                         <div>
 
-                            <select name="category" id="category" class="question_category" style="color: black" >
+                            <select name="category" id="category" class="question_category" style="color: black">
                                 <optgroup label="공연분과">
-                                    <option value="극예술연구회" >극예술연구회</option>
-                                    <option value="로터스"  >로터스</option>
-                                    <option value="뭉게구름" >뭉게구름</option>
-                                    <option value="아리랑" >아리랑</option>
+                                    <option value="극예술연구회">극예술연구회</option>
+                                    <option value="로터스">로터스</option>
+                                    <option value="뭉게구름">뭉게구름</option>
+                                    <option value="아리랑">아리랑</option>
                                     <option value="음샘">음샘</option>
                                     <option value="피어리스던">피어리스던</option>
                                     <option value="현여울">현여울</option>
@@ -120,30 +121,31 @@
 
                         <!-- 질문 내용작성부분 -->
                         <p>제목 : <input type="text" name="title" value="{{question.title}}"></p>
-                        <p>내용 : <textarea type="text" name="body" id="" cols="30" rows="10">{{question.body}}</textarea></p>
+                        <p>내용 : <textarea type="text" name="body" id="" cols="30" rows="10">{{question.body}}</textarea>
+                        </p>
                         <button type="submit">제출</button>
                     </form>
             </article>
         </div>
     </div>
 </section>
-            <!-- 선택된 option 값 고정 -->
-            <script>
-                var obj = document.getElementById("category");
-                for (i = 0; i < obj.options.length; i++) {
-                    if (obj.options[i].value == "{{question.category}}") {
-                        obj.selectedIndex = i;
-                    }
-                }
-            </script>
-{% endblock %} 
-              
-              <!-- 선택된 select 값 고정 -->
-              <script>
-                var obj = document.getElementById("category");
-                for (i = 0; i < obj.options.length; i++) {
-                  if (obj.options[i].value == "{{question.category}}") {
-                    obj.selectedIndex = i;
-                  }
-                }
-              </script>
+<!-- 선택된 option 값 고정 -->
+<script>
+    var obj = document.getElementById("category");
+    for (i = 0; i < obj.options.length; i++) {
+        if (obj.options[i].value == "{{question.category}}") {
+            obj.selectedIndex = i;
+        }
+    }
+</script>
+{% endblock %}
+
+<!-- 선택된 select 값 고정 -->
+<script>
+    var obj = document.getElementById("category");
+    for (i = 0; i < obj.options.length; i++) {
+        if (obj.options[i].value == "{{question.category}}") {
+            obj.selectedIndex = i;
+        }
+    }
+</script>

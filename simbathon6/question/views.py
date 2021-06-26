@@ -1,37 +1,33 @@
-from datetime import time
+from django.http import request
 from django.shortcuts import render, redirect, get_object_or_404
-from .models import Question
+from .models import Question, Comment
 from django.utils import timezone
+from django.core.paginator import Paginator
 # Create your views here.
 
+#질문
 def showquestion(requesst):
     questions = Question.objects.all()
-    return render(requesst, 'question/question.html',{'questions':questions})
+    return render(requesst, 'question/question.html',{'questions':questions,})
 
-def question_detail(request,id):
+def question_detail(request, id):
     question = get_object_or_404(Question, pk=id)
-    return render(request, 'question/question_detail.html',{'question':question})
-
-def question_new(request):
-    return render(request, 'question/question_new.html')
+    all_comments = question.comments.all().order_by('-created_at')
+    context = {'question': question,'comments':all_comments}
+    return render(request, 'question/question_detail.html', context)
 
 def question_create(request):
     new_question=Question()
-    new_question.title = request.GET['title']
-    new_question.category = request.GET['category']
+    new_question.title = request.POST['title']
+    new_question.category = request.POST['category']
     new_question.writer = request.user
     new_question.pub_date = timezone.now()
-    new_question.body = request.GET['body']
+    new_question.body = request.POST['body']
     new_question.save()
-    return redirect('question:question_detail', new_question.id)
-
-def question_edit(request, id):
-    edit_question = Question.objects.get(id=id)
-    return render(request,'question/question_edit.html', {'question': edit_question})
-
+    return redirect('question:question_detail', new_question.id) 
 
 def question_update(request, id):
-    update_question=Question()
+    update_question=Question.objects.get(id=id)
     update_question.title = request.POST['title']
     update_question.category = request.POST['category']
     update_question.writer = request.user
@@ -40,15 +36,44 @@ def question_update(request, id):
     update_question.save()
     return redirect('question:question_detail', update_question.id)
 
+def question_new(request):
+    return render(request, 'question/question_new.html')
+
+
+def question_edit(request, id):
+    edit_question = Question.objects.get(id=id)
+    return render(request,'question/question_edit.html', {'question': edit_question})
+
 def question_delete(request, id):
-    delete_question = Question.objects.get(id=id)
-    delete_question.delete()
+    delete_review = Question.objects.get(id=id)
+    delete_review.delete()
     return redirect('question:showquestion')
 
-def answer_create(request, id):
-    question = get_object_or_404(Question, pk=id)
-    question.answer_set.create(body=request.POST.get('body'), create_date=timezone.now())
-    return redirect('question:question_detail', id=id)
+#답글
+def create_comment(request, question_id) : 
+  if request.method == "POST":
+    question = get_object_or_404(Question, pk=question_id)
+    comment_content=request.POST.get('content')
+    current_user = request.user
+    Comment.objects.create(content=comment_content, question=question, writer=current_user)
+  return redirect('question:question_detail', question.pk)
+
+def update_comment(request, question_id, comment_id):
+    question = get_object_or_404(Question, pk=question_id)
+    comment = get_object_or_404(Comment, pk=comment_id)
+    if request.method=="POST":
+        comment.content = request.POST['content']
+        comment.save()
+        all_comments = question.comments.all()
+        return redirect('question:question_detail', question.pk)
+    return render(request, 'question/comment_update.html', {'comment' :comment})
+
+def delete_comment(request, question_id, comment_id):
+    question = get_object_or_404(Question, pk=question_id)
+    comment = get_object_or_404(Comment, pk=comment_id)
+    comment.delete()
+    return redirect('question:question_detail', question.pk)
+
 
 
 #동아리별 연결
@@ -299,3 +324,6 @@ def MECS(request):
 def NSA(request):
     questions = Question.objects.filter(category='NSA')
     return render(request, 'question/학술분과/NSA.html',{'questions':questions})
+
+
+

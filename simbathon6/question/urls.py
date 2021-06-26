@@ -3,15 +3,19 @@ from .views import *
 
 app_name = "question"
 urlpatterns = [
-    path('', showquestion, name="showquestion"),
+    path('',showquestion,name="showquestion"),
     path('<str:id>', question_detail, name= "question_detail"),
     path('question_new/', question_new, name="question_new"),
-    path('question_create/', question_create, name="question_create"),
     path('question_edit/<str:id>', question_edit, name="question_edit"),
+    path('question_create/', question_create, name="question_create"),
     path('question_update/<str:id>', question_update, name="question_update"),
     path('question_delete/<str:id>', question_delete, name="question_delete"),
-    path('answer_create/<int:id>', answer_create, name="answer_create"),
-    
+#답변
+    path('<int:question_id>/create_comment', create_comment, name="create_comment"),
+    path('<int:question_id>/<int:comment_id>/update_comment',update_comment, name="update_comment"),
+    path('<int:question_id>/<int:comment_id>/delete_comment', delete_comment, name="delete_comment"),
+
+    #동아리
     path('극예술연구회/',극예술연구회,name="극예술연구회"),
     path('로터스/',로터스,name="로터스"),
     path('뭉게구름/',뭉게구름,name="뭉게구름"),
