@@ -29,6 +29,7 @@ def question_edit(request, id):
     edit_question = Question.objects.get(id=id)
     return render(request,'question/question_edit.html', {'question': edit_question})
 
+
 def question_update(request, id):
     update_question=Question()
     update_question.title = request.POST['title']
