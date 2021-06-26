@@ -45,8 +45,8 @@ def question_edit(request, id):
     return render(request,'question/question_edit.html', {'question': edit_question})
 
 def question_delete(request, id):
-    delete_review = Question.objects.get(id=id)
-    delete_review.delete()
+    delete_questions = Question.objects.get(id=id)
+    delete_questions.delete()
     return redirect('question:showquestion')
 
 #답글
@@ -223,91 +223,91 @@ def 동국문학회(request):
 
 def 동국서도회(request):
     questions = Question.objects.filter(category='동국서도회')
-    return render(request, 'question/예창분과/동국서도회.html',{'reviews':questions})
+    return render(request, 'question/예창분과/동국서도회.html',{'questions':questions})
 
 def 동그라미(request):
     questions = Question.objects.filter(category='동그라미')
-    return render(request, 'question/예창분과/동그라미.html',{'reviews':questions})
+    return render(request, 'question/예창분과/동그라미.html',{'questions':questions})
 
 def 디딤돌(request):
     questions = Question.objects.filter(category='디딤돌')
-    return render(request, 'question/예창분과/디딤돌.html',{'reviews':questions})
+    return render(request, 'question/예창분과/디딤돌.html',{'questions':questions})
 
 def 만화얼(request):
     questions = Question.objects.filter(category='만화얼')
-    return render(request, 'question/예창분과/만화얼.html',{'reviews':questions})
+    return render(request, 'question/예창분과/만화얼.html',{'questions':questions})
 
 def 애드러쉬(request):
     questions = Question.objects.filter(category='애드러쉬')
-    return render(request, 'question/예창분과/애드러쉬.html',{'reviews':questions})
+    return render(request, 'question/예창분과/애드러쉬.html',{'questions':questions})
 
 def 기우회(request):
     questions = Question.objects.filter(category='기우회')
-    return render(request, 'question/체육제1분과/기우회.html',{'reviews':questions})
+    return render(request, 'question/체육제1분과/기우회.html',{'questions':questions})
 
 def 명궁(request):
     questions = Question.objects.filter(category='명궁')
-    return render(request, 'question/체육제1분과/명궁.html',{'reviews':questions})
+    return render(request, 'question/체육제1분과/명궁.html',{'questions':questions})
 
 def 선무부(request):
     questions = Question.objects.filter(category='선무부')
-    return render(request, 'question/체육제1분과/선무부.html',{'reviews':questions})
+    return render(request, 'question/체육제1분과/선무부.html',{'questions':questions})
 
 def 터스커스(request):
     questions = Question.objects.filter(category='터스커스')
-    return render(request, 'question/체육제1분과/터스커스.html',{'reviews':questions})
+    return render(request, 'question/체육제1분과/터스커스.html',{'questions':questions})
 
 def COURTIST(request):
     questions = Question.objects.filter(category='COURTIST')
-    return render(request, 'question/체육제1분과/COURTIST.html',{'reviews':questions})
+    return render(request, 'question/체육제1분과/COURTIST.html',{'questions':questions})
 
 def DUTC(request):
     questions = Question.objects.filter(category='DUTC')
-    return render(request, 'question/체육제1분과/DUTC.html',{'reviews':questions})
+    return render(request, 'question/체육제1분과/DUTC.html',{'questions':questions})
 
 def FC_TOTO(request):
     questions = Question.objects.filter(category='FC_TOTO')
-    return render(request, 'question/체육제1분과/FC_TOTO.html',{'reviews':questions})
+    return render(request, 'question/체육제1분과/FC_TOTO.html',{'questions':questions})
 
 def LAE(request):
     questions = Question.objects.filter(category='LAE')
-    return render(request, 'question/체육제1분과/L.A.E.html',{'reviews':questions})
+    return render(request, 'question/체육제1분과/L.A.E.html',{'questions':questions})
 
-def 동국탐험연구회(request):
-    questions = Question.objects.filter(category='동국탐험연구회')
-    return render(request, 'question/체육제2분과/동국탐험연구회.html',{'reviews':questions})
+def 동굴탐험연구회(request):
+    questions = Question.objects.filter(category='동굴탐험연구회')
+    return render(request, 'question/체육제2분과/동굴탐험연구회.html',{'questions':questions})
 
 def 무법(request):
     questions = Question.objects.filter(category='무법')
-    return render(request, 'question/체육제2분과/무법.html',{'reviews':questions})
+    return render(request, 'question/체육제2분과/무법.html',{'questions':questions})
 
 def 바람소리(request):
     questions = Question.objects.filter(category='바람소리')
-    return render(request, 'question/체육제2분과/바람소리.html',{'reviews':questions})
+    return render(request, 'question/체육제2분과/바람소리.html',{'questions':questions})
 
 def 산악부(request):
     questions = Question.objects.filter(category='산악부')
-    return render(request, 'question/체육제2분과/산악부.html',{'reviews':questions})
+    return render(request, 'question/체육제2분과/산악부.html',{'questions':questions})
 
 def 수중탐구연구회(request):
     questions = Question.objects.filter(category='수중탐구연구회')
-    return render(request, 'question/체육제2분과/수중탐구연구회.html',{'reviews':questions})
+    return render(request, 'question/체육제2분과/수중탐구연구회.html',{'questions':questions})
 
 def DUST(request):
     questions = Question.objects.filter(category='DUST')
-    return render(request, 'question/체육제2분과/DUST.html',{'reviews':questions})         
+    return render(request, 'question/체육제2분과/DUST.html',{'questions':questions})         
 
 def 맑스철학연구회(request):
     questions = Question.objects.filter(category='맑스철학연구회')
-    return render(request, 'question/학술분과/맑스철학연구회.html',{'reviews':questions})
+    return render(request, 'question/학술분과/맑스철학연구회.html',{'questions':questions})
 
 def CAFE_IN(request):
     questions = Question.objects.filter(category='CAFE_IN')
-    return render(request, 'question/학술분과/CAFE_IN.html',{'reviews':questions})
+    return render(request, 'question/학술분과/CAFE_IN.html',{'questions':questions})
 
 def DNA(request):
     questions = Question.objects.filter(category='DNA')
-    return render(request, 'question/학술분과/DNA.html',{'reviews':questions})
+    return render(request, 'question/학술분과/DNA.html',{'questions':questions})
 
 def DUSSA(request):
     questions = Question.objects.filter(category='DUSSA')
