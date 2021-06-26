@@ -95,7 +95,9 @@ class Question(models.Model):
     def summary(self):
         return self.body[:10] 
 
-class Answer(models.Model):
-    question = models.ForeignKey(Question, on_delete=models.CASCADE)
-    body = models.TextField()
-    create_date = models.DateTimeField()
+class Comment(models.Model):
+  content = models.TextField()
+  created_at = models.DateTimeField(auto_now_add=True)
+  updated_at = models.DateTimeField(auto_now = True)
+  writer = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
+  question = models.ForeignKey(Question, on_delete = models.CASCADE, related_name='comments')

@@ -1,65 +1,77 @@
 {% extends 'base.html' %}
 {% load static %}
-
 {% block content %}
-
 
 <!-- 본문내용 -->
 <section id="main">
-    <div class="container">
-        <div class="row">
+  <div class="container">
+    <div class="row">
 
-        </div>
-             <!-- Content -->
-          <div id="content" class="col-8 col-12-medium imp-medium">
-              <!-- Post -->
-                <article class="box post">
-                  <header>
-                        <h1> <strong>{{question.title}}</strong></h1><br />
-                  </header>
-
-                     작성자 : {{question.writer}}<br>
-                     날짜 : {{question.pub_date}}<br>
-                     <hr>
-                     <p>{{question.body}}</p>
-                     <hr>
-                    
-                     {% if user == question.writer %}
-                     <a href="{% url 'question:question_edit' question.id %}">수정하기</a>
-                     <a href="{% url 'question:question_delete' question.id %}">삭제하기</a>
-                    {% endif %}
-                    <br><br><br><br>
-
-                    <h5>{{question.answer_set.count}}개의 답변이 있습니다.</h5>
-                    <div>
-                      <ul>
-                        {% for answer in question.answer_set.all %} 
-                        <li>{{answer.body}}</li>
-                        {% endfor %}
-                      </ul>
-                    </div>
-
-                    <form action="{% url 'question:answer_create' question.id %}" method="POST">
-                      {% csrf_token %} 
-                      <textarea name="body" id="body" rows="15"></textarea>
-                      <br>
-                      <input type="submit" value="답변등록">
-                    </form>
-
-                </article>
-              <!-- 선택된 select 값 고정 -->
-              <script>
-                var obj = document.getElementById("category");
-                for (i = 0; i < obj.options.length; i++) {
-                  if (obj.options[i].value == "{{question.category}}") {
-                    obj.selectedIndex = i;
-                  }
-                }
-              </script>
-          </div>
-
-       
     </div>
+    <!-- Content -->
+    <div id="content" class="col-8 col-12-medium imp-medium">
+      <!-- Post -->
+      <article class="box post">
+        <header>
+          <h1> <strong>{{question.title}}</strong></h1><br />
+        </header>
+
+        작성자 : {{question.writer}}<br>
+        날짜 : {{question.pub_date}}<br>
+        <hr>
+        <p>{{question.body}}</p>
+        <hr>
+
+        {% if user == question.writer %}
+        <ul class="actions">
+          <li><a href="{% url 'question:question_edit' question.id %}" class="button icon solid fa-file">수정</a></li>
+          <li><a href="{% url 'question:question_delete' question.id %}" class="button icon solid fa-file">삭제</a>
+          </li>
+        </ul>
+        {% endif %}
+        <br>
+        <hr>
+        <h3>{{question.comments.count}} 개의 답변의 있습니다.</h3><hr>
+        <!-- 답변 -->
+        <br><br><h3>답변 목록</h3>
+        <hr>
+        {% for comment in comments %}
+        <div class="blog-comment content">
+          <div class="media">
+            <div class="media-body">
+              <h5 class="line-content">{{ comment.content|linebreaksbr }}</h5>
+              <div class="date-btn">
+                <p class="media-heading">작성자 : {{comment.writer}} 날짜 : {{comment.created_at}}</p>
+
+                {% if user == comment.writer %}
+                <a href="{% url 'question:update_comment' question.pk comment.pk %}">수정하기</a>
+                <a href="{% url 'question:delete_comment' question.pk comment.pk %}">삭제하기</a>
+                <hr>
+                {% endif %}
+              </div>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+        
+        <div class="blog-comment-form">
+          <br><Br>
+          <h3>답변 작성</h3>
+          <form action="{% url 'question:create_comment' question.id %}" method="post">
+            {% csrf_token %}
+            <textarea class="form-control" placeholder="질문에 대한 답변을 작성해 주세요" rows="5" name="content" required
+              id="comment"></textarea>
+            <div class="contact-submit input"> <br>
+              <input name="submit" type="submit" class="form-control" id="submit" value="작성완료" />
+            </div>
+          </form>
+        </div>
+
+
+      </article>
+
+    </div>
+  </div>
 </section>
 
 {% endblock %}

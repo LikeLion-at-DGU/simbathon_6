@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<body class="homepage is-preload">
+    <div id="page-wrapper">
+
+        <!-- Main -->
+        <section id="main">
+            <div class="container">
+                <div class="row">
+
+                    <!-- Content -->
+                    <div id="content" class="col-8 col-12-medium">
+
+                        <!-- Post -->
+                        <article class="box post">
+                            <form method="POST" action="{% url 'account_logout' %}">
+                                <p>현재 {{user}} 으로 로그인 되어 있습니다.</p>
+                                <p>로그아웃 하시겠습니까</p>
+                                <hr>
+                                {% csrf_token %} {{ form.as_p }}
+                                <input type="submit" value="Logout">
+                            </form>
+                        </article>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+</body>
+
+{% endblock %}

@@ -1,16 +1,45 @@
 {% extends 'base.html' %}{% load static %}{% block content %}
-<div class="container">
-    <h1>{{user.username}}</h1> <br><br>
-    <div>
-    <h3> REVIEW </h3>
-    {% for review in reviews %}
-    <a href ="{%url 'review:review_detail' review.id %}">{{review.title}}</a><hr>
-    {%endfor%}
-    <br>
-    <h3> QUESTION </h3>
-    {% for question in questions %}
-    <a href ="{%url 'question:question_detail' question.id%}">{{question.title}}</a><hr>
-    {%endfor%}
+
+<body class="homepage is-preload">
+    <div id="page-wrapper">
+
+        <!-- Main -->
+        <section id="main">
+            <div class="container">
+                <div class="row">
+
+                    <!-- Content -->
+                    <div id="content" class="col-8 col-12-medium">
+
+                        <!-- Post -->
+                        <article class="box post">
+                            <h2>- Mypage -</h2>
+                            <h1>Username : <strong> {{user.username}}</strong></h1>
+                            <hr> <br><br>
+                            <div>
+                                <h2> REVIEW </h2>
+                                {% for review in reviews %}
+                                <a href="{%url 'review:review_detail' review.id %}">{{review.title}}</a>
+                                <hr>
+                                {%endfor%}
+                                <br>
+                                <h2> QUESTION </h2>
+                                {% for question in questions %}
+                                <a href="{%url 'question:question_detail' question.id%}">{{question.title}}</a>
+                                <hr>
+                                {%endfor%}
+                            </div>
+                        </article>
+                    </div>
+                </div>
+            </div>
+        </section>
     </div>
+</body>
+
+
+<div class="container">
+
+
 </div>
 {%endblock%}
