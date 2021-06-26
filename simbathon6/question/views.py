@@ -1,32 +1,37 @@
-from django.http import request
+from datetime import time
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import Question
 from django.utils import timezone
-from django.core.paginator import Paginator
 # Create your views here.
 
 def showquestion(requesst):
     questions = Question.objects.all()
     return render(requesst, 'question/question.html',{'questions':questions})
 
-def question_detail(request, id):
+def question_detail(request,id):
     question = get_object_or_404(Question, pk=id)
-    context = {'question': question}
-    return render(request, 'question/question_detail.html', context)
+    return render(request, 'question/question_detail.html',{'question':question})
+
+def question_new(request):
+    return render(request, 'question/question_new.html')
 
 def question_create(request):
     new_question=Question()
-    new_question.title = request.POST['title']
-    new_question.category = request.POST['category']
+    new_question.title = request.GET['title']
+    new_question.category = request.GET['category']
     new_question.writer = request.user
     new_question.pub_date = timezone.now()
-    new_question.body = request.POST['body']
+    new_question.body = request.GET['body']
     new_question.save()
-    return redirect('question:question_detail', new_question.id) 
+    return redirect('question:question_detail', new_question.id)
+
+def question_edit(request, id):
+    edit_question = Question.objects.get(id=id)
+    return render(request,'question/question_edit.html', {'question': edit_question})
 
 
 def question_update(request, id):
-    update_question=Question.objects.get(id=id)
+    update_question=Question()
     update_question.title = request.POST['title']
     update_question.category = request.POST['category']
     update_question.writer = request.user
@@ -35,21 +40,15 @@ def question_update(request, id):
     update_question.save()
     return redirect('question:question_detail', update_question.id)
 
-def question_new(request):
-    return render(request, 'question/question_new.html')
-
-
-def question_edit(request, id):
-    edit_question = Question.objects.get(id=id)
-    return render(request,'question/question_edit.html', {'question': edit_question})
-
-
 def question_delete(request, id):
-    delete_review = Question.objects.get(id=id)
-    delete_review.delete()
+    delete_question = Question.objects.get(id=id)
+    delete_question.delete()
     return redirect('question:showquestion')
 
-
+def answer_create(request, id):
+    question = get_object_or_404(Question, pk=id)
+    question.answer_set.create(body=request.POST.get('body'), create_date=timezone.now())
+    return redirect('question:question_detail', id=id)
 
 
 #동아리별 연결

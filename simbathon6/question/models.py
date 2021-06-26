@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 # Create your models here.
+
 class Question(models.Model):
     QUESTION_CATEGORY_CHOICES = [
         ('극예술연구회','극예술연구회'), 
@@ -75,7 +76,8 @@ class Question(models.Model):
         ('KCC','KCC'), 
         ('MECS','MECS'), 
         ('NSA','NSA'),
-            ]
+    ]
+
 
     category = models.CharField(choices=QUESTION_CATEGORY_CHOICES, max_length=300)
     id = models.AutoField(primary_key=True)
@@ -83,10 +85,17 @@ class Question(models.Model):
     writer = models.ForeignKey(User, on_delete=models.CASCADE)
     pub_date = models.DateTimeField()
     body = models.TextField()
+    
+    
 
     def __str__(self):
         return self.title
 
 
     def summary(self):
-        return self.body[:10]
+        return self.body[:10] 
+
+class Answer(models.Model):
+    question = models.ForeignKey(Question, on_delete=models.CASCADE)
+    body = models.TextField()
+    create_date = models.DateTimeField()
